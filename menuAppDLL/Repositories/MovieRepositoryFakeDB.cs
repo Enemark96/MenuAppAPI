@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using menuAppEntity;
+using menuAppDAL.Entities;
+
 
 namespace menuAppDAL.Repositories
 {

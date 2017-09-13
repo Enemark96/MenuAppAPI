@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using menuAppBLL;
-using menuAppEntity;
+using menuAppBLL.BusinessObjects;
+using menuAppDAL.Entities;
 using static System.Console;
 
 namespace menuAppUI
@@ -11,7 +12,7 @@ namespace menuAppUI
     {
         static BLLFacade bllFacade = new BLLFacade();
 
-        public static Movie FindMovieById()
+        public static MovieBO FindMovieById()
         {
             WriteLine("Insert a movie Id:");
             int id;

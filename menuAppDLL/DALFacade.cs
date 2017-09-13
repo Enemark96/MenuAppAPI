@@ -8,11 +8,9 @@ namespace menuAppDAL
 {
     public class DALFacade
     {
-        public IMovieRepository MovieRepository { get; } = new MovieRepositoryEFMemory(new Context.InMemoryContext());
-
-
-        public IUnitOfWork UnitOfWork => new UnitOfWorkMem();
+        public IUnitOfWork UnitOfWork => new UnitOfWork();
     }
 
   
+
 }

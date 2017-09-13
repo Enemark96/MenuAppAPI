@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using menuAppEntity;
+using menuAppBLL.BusinessObjects;
+using menuAppDAL.Entities;
+
 
 namespace menuAppBLL
 {
     public interface IMovieService
     {
         //C
-        Movie Create(Movie movie);
+        MovieBO Create(MovieBO movie);
+        List<MovieBO> AddMovies(List<MovieBO> movies);
         //R
-        List<Movie> GetAll();
-        Movie Get(int id);
+        List<MovieBO> GetAll();
+        MovieBO Get(int id);
         //U
-        Movie Update(Movie movie);
+        MovieBO Update(MovieBO movie);
         //D
-        Movie Delete(int Id);
+        MovieBO Delete(int Id);
 
 
     }

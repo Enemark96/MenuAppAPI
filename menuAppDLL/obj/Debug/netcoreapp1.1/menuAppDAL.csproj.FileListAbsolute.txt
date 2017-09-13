@@ -1,0 +1,7 @@
+C:\Users\Jacob Enemark\documents\visual studio 2017\Projects\menuApp\menuAppDLL\bin\Debug\netcoreapp1.1\menuAppDAL.deps.json
+C:\Users\Jacob Enemark\documents\visual studio 2017\Projects\menuApp\menuAppDLL\bin\Debug\netcoreapp1.1\menuAppDAL.dll
+C:\Users\Jacob Enemark\documents\visual studio 2017\Projects\menuApp\menuAppDLL\bin\Debug\netcoreapp1.1\menuAppDAL.pdb
+C:\Users\Jacob Enemark\documents\visual studio 2017\Projects\menuApp\menuAppDLL\obj\Debug\netcoreapp1.1\menuAppDAL.AssemblyInfo.cs
+C:\Users\Jacob Enemark\documents\visual studio 2017\Projects\menuApp\menuAppDLL\obj\Debug\netcoreapp1.1\menuAppDAL.dll
+C:\Users\Jacob Enemark\documents\visual studio 2017\Projects\menuApp\menuAppDLL\obj\Debug\netcoreapp1.1\menuAppDAL.pdb
+C:\Users\Jacob Enemark\documents\visual studio 2017\Projects\menuApp\menuAppDLL\obj\Debug\netcoreapp1.1\menuAppDAL.csprojResolveAssemblyReference.cache

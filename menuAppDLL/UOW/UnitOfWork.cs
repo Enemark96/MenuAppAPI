@@ -2,19 +2,23 @@
 using System.Collections.Generic;
 using System.Text;
 using menuAppDAL.Context;
+using menuAppDAL.Repositories;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 
 namespace menuAppDAL.UOW
 {
-    class UnitOfWorkMem : IUnitOfWork
+    class UnitOfWork : IUnitOfWork
     {
         public IMovieRepository MovieRepository { get; internal set; }
-        private InMemoryContext context;
+        public IRentalRepository RentalRepository { get; internal set; }
 
-        public UnitOfWorkMem()
+        private MovieAppContext context;
+
+        public UnitOfWork()
         {
-            context = new InMemoryContext();
+            context = new MovieAppContext();
             MovieRepository = new MovieRepositoryEFMemory(context);
+            RentalRepository = new RentalRepository(context);
         }
 
         public void Dispose()

@@ -1,10 +1,9 @@
-﻿using System;
+﻿using menuAppBLL.BusinessObjects;
+using menuAppDAL;
+using menuAppDAL.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using menuAppDAL;
-using menuAppEntity;
-using static System.Console;
 
 
 namespace menuAppBLL.Services
@@ -14,6 +13,7 @@ namespace menuAppBLL.Services
         private DALFacade facade;
         private IMovieRepository repo;
 
+
         public MovieServices(DALFacade facade)
         {
             this.facade = facade;
@@ -21,44 +21,75 @@ namespace menuAppBLL.Services
 
         private Movie newMovie;
 
-        public Movie Create(Movie movie)
+        public MovieBO Create(MovieBO movie)
         {
             using (var uow = facade.UnitOfWork)
             {
-                var newMovie = uow.MovieRepository.Create(movie);
+                newMovie = uow.MovieRepository.Create(Convert(movie));
                 uow.Complete();
-                return newMovie;
+                return Convert(newMovie);
             }
         }
 
-        public Movie Delete(int Id)
+        public void CreateAll(List<MovieBO> movies)
+        {
+            using (var uow = facade.UnitOfWork)
+            {
+
+
+                foreach (var movie in movies)
+                {
+                    newMovie = uow.MovieRepository.Create(Convert(movie));
+                  
+                }
+                uow.Complete();
+            }
+        }
+
+
+        public List<MovieBO> AddMovies(List<MovieBO> movies)
+        {
+            using (var uow = facade.UnitOfWork)
+            {
+                foreach (var movie in movies)
+                {
+                    uow.MovieRepository.Create(Convert(movie));
+                }
+
+                uow.Complete();
+                return movies;
+            }
+        }
+
+        public MovieBO Delete(int Id)
         {
             using (var uow = facade.UnitOfWork)
             {
                 var newMovie = uow.MovieRepository.Delete(Id);
                 uow.Complete();
-                return newMovie;
+                return Convert(newMovie);
             }
         }
 
 
-        public Movie Get(int id)
+        public MovieBO Get(int id)
         {
             using (var uow = facade.UnitOfWork)
             {
-                return uow.MovieRepository.Get(id);
+                return Convert(uow.MovieRepository.Get(id));
             }
         }
 
-        public List<Movie> GetAll()
+        public List<MovieBO> GetAll()
         {
             using (var uow = facade.UnitOfWork)
             {
-                return uow.MovieRepository.GetAll();
+                // return uow.MovieRepository.GetAll();
+                return uow.MovieRepository.GetAll().Select(Convert).ToList();
             }
         }
 
-        public Movie Update(Movie movie)
+        public MovieBO Update(MovieBO movie)
         {
             using (var uow = facade.UnitOfWork)
             {
@@ -71,8 +102,30 @@ namespace menuAppBLL.Services
                 movieFromDb.VideoName = movie.VideoName;
                 movieFromDb.Genre = movie.Genre;
                 uow.Complete();
-                return movieFromDb;
+                return Convert(movieFromDb);
             }
         }
+
+        private Movie Convert(MovieBO movie)
+        {
+            return new Movie()
+            {
+                ID = movie.ID,
+                VideoName = movie.VideoName,
+                Genre = movie.Genre
+            };
+        }
+
+        private MovieBO Convert(Movie movie)
+        {
+            return new MovieBO()
+            {
+                ID = movie.ID,
+                VideoName = movie.VideoName,
+                Genre = movie.Genre
+            };
+        }
+
+
     }
 }

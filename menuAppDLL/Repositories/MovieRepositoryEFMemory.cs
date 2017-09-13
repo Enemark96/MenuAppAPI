@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 using menuAppDAL.Context;
-using menuAppEntity;
+
 using System.Linq;
+using menuAppDAL.Entities;
 
 
 namespace menuAppDAL
 {
     class MovieRepositoryEFMemory : IMovieRepository
     {
-        private readonly InMemoryContext _context;
+        private readonly MovieAppContext _context;
 
-        public MovieRepositoryEFMemory(InMemoryContext context)
+        public MovieRepositoryEFMemory(MovieAppContext context)
         {
             _context = context;
         }

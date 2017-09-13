@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using menuAppBLL;
-using menuAppDAL;
-using menuAppEntity;
+﻿using menuAppBLL;
+using menuAppDAL.Entities;
 using menuAppUI;
+using System.Collections.Generic;
+using menuAppBLL.BusinessObjects;
 using static System.Console;
 
 namespace Video_Menu
@@ -40,7 +39,7 @@ namespace Video_Menu
                 switch (selection)
                 {
                     case 1:
-                        AddMovie();
+                        AddMovies();
                         break;
                     case 2:
                         ListMovies();
@@ -53,18 +52,15 @@ namespace Video_Menu
                         break;
                 }
                 selection = Menu.ShowMenu(menuItems);
-                
+
 
             }
             WriteLine("BYE BYE");
 
         }
 
-        public static void AddMovie()
+        public static MovieBO AddMovie()
         {
-        
-            WriteLine("Create a movie");
-
             WriteLine("\nType in a movie Name: ");
             string name = ReadLine();
 
@@ -72,13 +68,32 @@ namespace Video_Menu
             string genre = ReadLine();
             WriteLine("\n");
 
-            WriteLine($"You created a movie with the NAME: {name} and GENRE: {genre}");
+            MovieBO newMovie = new MovieBO() { VideoName = name, Genre = genre };
+            return newMovie;
+        }
 
-            bllFacade.MovieServices.Create(new Movie()
+        public static void AddMovies()
+        {
+            int selection;
+            WriteLine("You chosed to add a movie");
+            WriteLine("How many movies do you wanna add?");
+            int.TryParse(ReadLine(), out selection);
+
+            if (selection == 1)
             {
-                VideoName = name,
-                Genre = genre,
-            });
+                bllFacade.MovieServices.Create(AddMovie());
+            }
+            else
+            {
+                List<MovieBO> movies = new List<MovieBO>();
+
+                for (int i = 0; i < selection; i++)
+                {
+                    movies.Add(AddMovie());
+                }
+
+                bllFacade.MovieServices.AddMovies(movies);
+            }
         }
 
         public static void ListMovies()

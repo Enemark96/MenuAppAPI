@@ -9,5 +9,7 @@ namespace menuAppBLL
     public class BLLFacade
     {
         public IMovieService MovieServices { get; } = new MovieServices(new DALFacade());
+
+        public IRentalService RentalServices { get; } = new RentalService(new DALFacade());
     }
 }
