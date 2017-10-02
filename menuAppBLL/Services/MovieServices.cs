@@ -1,4 +1,5 @@
 ﻿using menuAppBLL.BusinessObjects;
+using menuAppBLL.Converters;
 using menuAppDAL;
 using menuAppDAL.Entities;
 using System;
@@ -12,7 +13,7 @@ namespace menuAppBLL.Services
     {
         private DALFacade facade;
         private IMovieRepository repo;
-
+        private MovieConverter conv = new MovieConverter();
 
         public MovieServices(DALFacade facade)
         {
@@ -25,9 +26,9 @@ namespace menuAppBLL.Services
         {
             using (var uow = facade.UnitOfWork)
             {
-                newMovie = uow.MovieRepository.Create(Convert(movie));
+                newMovie = uow.MovieRepository.Create(conv.Convert(movie));
                 uow.Complete();
-                return Convert(newMovie);
+                return conv.Convert(newMovie);
             }
         }
 
@@ -39,7 +40,7 @@ namespace menuAppBLL.Services
 
                 foreach (var movie in movies)
                 {
-                    newMovie = uow.MovieRepository.Create(Convert(movie));
+                    newMovie = uow.MovieRepository.Create(conv.Convert(movie));
                   
                 }
                 uow.Complete();
@@ -53,7 +54,7 @@ namespace menuAppBLL.Services
             {
                 foreach (var movie in movies)
                 {
-                    uow.MovieRepository.Create(Convert(movie));
+                    uow.MovieRepository.Create(conv.Convert(movie));
                 }
 
                 uow.Complete();
@@ -67,7 +68,7 @@ namespace menuAppBLL.Services
             {
                 var newMovie = uow.MovieRepository.Delete(Id);
                 uow.Complete();
-                return Convert(newMovie);
+                return conv.Convert(newMovie);
             }
         }
 
@@ -76,7 +77,7 @@ namespace menuAppBLL.Services
         {
             using (var uow = facade.UnitOfWork)
             {
-                return Convert(uow.MovieRepository.Get(id));
+                return conv.Convert(uow.MovieRepository.Get(id));
             }
         }
 
@@ -85,7 +86,7 @@ namespace menuAppBLL.Services
             using (var uow = facade.UnitOfWork)
             {
                 // return uow.MovieRepository.GetAll();
-                return uow.MovieRepository.GetAll().Select(Convert).ToList();
+                return uow.MovieRepository.GetAll().Select(conv.Convert).ToList();
             }
         }
 
@@ -102,30 +103,8 @@ namespace menuAppBLL.Services
                 movieFromDb.VideoName = movie.VideoName;
                 movieFromDb.Genre = movie.Genre;
                 uow.Complete();
-                return Convert(movieFromDb);
+                return conv.Convert(movieFromDb);
             }
         }
-
-        private Movie Convert(MovieBO movie)
-        {
-            return new Movie()
-            {
-                ID = movie.ID,
-                VideoName = movie.VideoName,
-                Genre = movie.Genre
-            };
-        }
-
-        private MovieBO Convert(Movie movie)
-        {
-            return new MovieBO()
-            {
-                ID = movie.ID,
-                VideoName = movie.VideoName,
-                Genre = movie.Genre
-            };
-        }
-
-
     }
 }

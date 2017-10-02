@@ -1,9 +1,7 @@
-﻿using System;
+﻿using menuAppDAL.Context;
+using menuAppDAL.Entities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using menuAppDAL.Context;
-using menuAppDAL.Entities;
 
 namespace menuAppDAL.Repositories
 {
@@ -29,7 +27,7 @@ namespace menuAppDAL.Repositories
 
         public Rental Get(int id)
         {
-            return _context.Rentals.FirstOrDefault(o => o.Id == id);
+            return _context.Rentals.FirstOrDefault(o => o.RentalId == id);
         }
 
         public Rental Delete(int Id)

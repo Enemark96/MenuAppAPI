@@ -17,6 +17,7 @@ namespace menuAppDAL.UOW
         public UnitOfWork()
         {
             context = new MovieAppContext();
+            context.Database.EnsureCreated();
             MovieRepository = new MovieRepositoryEFMemory(context);
             RentalRepository = new RentalRepository(context);
         }

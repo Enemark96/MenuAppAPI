@@ -12,6 +12,9 @@ namespace menuAppBLL.BusinessObjects
 
         public DateTime DeliveryDate { get; set; }
 
+        public int MovieID { get; set; }
+        public MovieBO Movie { get; set; }
+
 
     }
 }

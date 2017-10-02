@@ -12,5 +12,13 @@ namespace menuAppDAL.Entities
 
         public string Genre { get; set; }
 
+
+
+        public List<Rental> Rental { get; set; }
+
+        public int RentalID { get; set; }
+        
+
     }
 }
+

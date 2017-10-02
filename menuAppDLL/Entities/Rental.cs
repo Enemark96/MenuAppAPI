@@ -6,11 +6,15 @@ namespace menuAppDAL.Entities
 {
     public class Rental
     {
-        public int Id { get; set; }
+        public int RentalId { get; set; }
 
         public DateTime OrderDate { get; set; }
 
-        public DateTime DeliveryDate { get; set; }  
+        public DateTime DeliveryDate { get; set; }
+
+
+        public int MovieID { get; set; }
+        public Movie Movie { get; set; }
 
 
     }

@@ -47,6 +47,7 @@ namespace menuAppBLL.Services
             using (var uow = _facade.UnitOfWork)
             {
                 var rentalEntity = uow.RentalRepository.Get(id);
+                rentalEntity.Movie = uow.MovieRepository.Get(rentalEntity.MovieID);
                 return conv.Convert(rentalEntity);
             }
         }
@@ -70,7 +71,11 @@ namespace menuAppBLL.Services
                 }
                 rentalEntity.DeliveryDate = rental.DeliveryDate;
                 rentalEntity.OrderDate = rental.OrderDate;
+                rentalEntity.MovieID = rentalEntity.MovieID;
                 uow.Complete();
+
+
+                rentalEntity.Movie = uow.MovieRepository.Get(rentalEntity.MovieID);
                 return conv.Convert(rentalEntity);
             }
 
